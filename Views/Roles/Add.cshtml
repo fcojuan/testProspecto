@@ -1,0 +1,25 @@
+﻿@model string
+ @{
+    ViewData["Title"] = "Index";
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+<div class="top-buffer"></div>
+<div class="card border-primary mb-3" style="margin-top:10px !important">
+    <div class="card-header bg-primary text-white">CREAR ROL</div>
+    <div class="card-body" id="content">
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        @using (Html.BeginForm("Create","Roles", FormMethod.Post))
+        {
+        @*<form asp-action="Create" asp-controller="Roles" role="form" method="post">*@
+            <a asp-action="Index" class="btn btn-secondary">Regresar</a>
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input name="name" class="form-control" />
+            </div>
+            <button type="submit" class="btn btn-primary">Crear</button>
+        @*</form>*@
+        }
+    </div>
+</div>

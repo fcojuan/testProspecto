@@ -1,0 +1,142 @@
+﻿@model IEnumerable<Prospecto.Models.ProspectoModel>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+<div class="top-buffer"></div>
+<div class="card border-primary mb-3" style="margin-top:10px !important">
+    <div class="card-header bg-primary text-white">CAPTURA DE PROSPECTOS</div>
+    <div class="card-body" id="content">
+@*        @if (ViewBag.VerOpc == "F")
+        {
+            <div class="row">
+                <div class="col-md-5 col-sm-5 col-xs-3 text-left">
+                    <a href="@Url.Action("Index", "Home", new { area = "" })" class="elements"><span class="fas fa-arrow-left">Regresar</span></a>
+                </div>
+            </div>
+            <div class="alert alert-danger" role="alert">
+                <strong>¡Información!</strong> NO TIENE ACCESO A ESTA OPCIÓN.
+            </div>
+        }
+        else
+        {*@
+@*            <div class="btn-toolbar" style="display: flex;justify-content: center;">
+                <a class="btn btn-primary mr-5" href="@Url.Action("Index", "Home",new { area = "" })" role="button" data-toggle="tooltip" data-placement="top" title="Regresar">
+                    <i class="fas fa-arrow-left"></i> Regresar
+                </a>
+
+                <a class="btn btn-info text-white mr-5" href="@Url.Action("AddEdit", "CProspecto")?id=" role="button" data-toggle="tooltip" data-placement="top" title="Nuevo">
+                    <i class="fa fa-plus"></i> Nuevo
+                </a>
+
+            </div>*@
+                <div class="col-md-12 text-center">
+                    <a class="btn btn-primary mr-5" href="@Url.Action("Index", "Home",new { area = "" })" role="button" data-toggle="tooltip" data-placement="top" title="Regresar">
+                        <i class="fas fa-arrow-left"></i> Regresar
+                    </a>
+
+                    <a class="btn btn-primary text-white mr-5" href="@Url.Action("AddEdit", "CProspecto",new { id =""})?id=" role="button" data-toggle="tooltip" data-placement="top" title="Nuevo">
+                        <i class="fa fa-plus"></i> Nuevo
+                    </a>
+                </div>
+            <div class="top-buffer"></div>
+            <br />
+            <div class="table-responsive">
+                <table id="iProspecto" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th class="th-sm">
+                            </th>
+                            <th class="th-sm">
+                                Nombre Del Prospecto
+                            </th>
+                            <th class="th-sm">
+                                Primer Apellido
+                            </th>
+                            <th class="th-sm">
+                                Segundo Apellido
+                            </th>
+                            <th class="th-sm">
+                                Estatus
+                            </th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>
+                            </th>
+                            <th>
+                                Nombre Del Prospecto
+                            </th>
+                            <th>
+                                Primer Apellido
+                            </th>
+                            <th>
+                                Segundo Apellido
+                            </th>
+                            <th>
+                                Estatus
+                            </th>
+                        </tr>
+                    </tfoot>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <a class="btn btn-primary text-white btn-sm" href="@Url.Action("AddEdit", "CProspecto",new { id =@item.ID})" role="button" data-toggle="tooltip" data-placement="top" title="Editar Registro">
+                                        <i class="fas fa-pencil-alt"></i>
+                                    </a>
+
+                                    <a class="btn btn-success text-white btn-sm" href="@Url.Action("AddEdit2", "CProspecto",new{id=@item.ID})" role="button" data-toggle="tooltip" 
+                                            data-placement="top" title="Evaluar Prospecto">
+                                        <i class="fa fa-check"></i>
+                                    </a>
+
+                                    <a id="EraseFam" class="btn btn-danger btn-sm text-white modal-link" data-toggle="modal" data-target="#addProsmodal"
+                                       data-assigned-id="@item.ID" data-title="Borrar Registro" data-url="@Url.Action("Delete", "CProspecto")?id=" data-placement="bottom" title="Borrar Registro">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Nombre)
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.PrimerApellido)
+                                </td>
+                                <td class="text-left">
+                                    @Html.DisplayFor(modelItem => item.SegundoApellido)
+                                </td>
+                                <td class="text-center" style='color: @(item.Estatus == "Autorizado" ?"Green" : item.Estatus == "Rechazado" ?"Red" : "Black");'>
+                                    @Html.DisplayFor(modelItem => item.Estatus)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        @*}*@
+    </div>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
+<!-- The Modal -->
+<div class="modal fade" id="addProsmodal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        @*<a href="#close" title="Close" class="modal-close-btn">X</a>*@
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="titulo"></h4>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="Contenido">
+            </div>
+        </div>
+    </div>
+</div>

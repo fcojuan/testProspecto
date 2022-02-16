@@ -1,0 +1,165 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ConFunT</title>
+
+    <script src="~/lib/jquery/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/additional-methods.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="~/lib/font-awesome/css/all.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    @*Mensajes de Alerta*@
+    <link href="~/lib/sweetalert2/dist/sweetalert2.css" rel="stylesheet" />
+    <script src="~/lib/sweetalert2/dist/sweetalert2.min.js"></script>
+@*    <link href="~/sweetAlert/sweetalert.css" rel="stylesheet" />
+    <script src="~/sweetAlert/sweetalert.min.js"></script>*@
+    @*Mensajes de Alerta JavaScript*@
+    <script src="~/alertifyjs/alertify.min.js"></script>
+    <link href="~/alertifyjs/css/alertify.min.css" rel="stylesheet" />
+    <link href="~/alertifyjs/css/themes/default.min.css" rel="stylesheet" />
+
+
+    @*Loading paginas en procesos*@
+    <link href="~/css/LoadingCarga.css" rel="stylesheet" />
+
+    <style>
+        .ajs-header {
+            background: rgb(249,249,249) !important;
+            /*color para el header*/
+        }
+
+        .ajs-dialog {
+            background: #85E088 !important;
+            /*color para el body*/
+        }
+
+        .ajs-footer {
+            background: rgb(249,249,249) !important;
+            /*color para el footer*/
+        }
+
+
+        #loader {
+            position: fixed;
+            left: 1px;
+            top: 1px;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            background: url('../images/Loading.gif') 50% 50% no-repeat rgb(249,249,249);
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('body').on('keydown', 'input, select, textarea', function (e) {
+                var self = $(this),
+                    form = self.parents('form:eq(0)'),
+                    submit = (self.attr('type') == 'submit' || self.attr('type') == 'button'),
+                    focusable,
+                    next;
+
+                if (e.keyCode == 13 && !submit) {
+                    focusable = form.find('input,button,a,select,textarea').filter(':visible:not([readonly]):not([disabled]):not([tabindex="-1"])');
+                    next = focusable.eq(focusable.index(this) + 1);
+
+                    if (next.length) {
+                        next.focus().select();
+                    }
+                    else {
+                        //vuelve al primer tabindex=1
+                        var focusable = document.querySelectorAll('input, select, textarea, [tabindex]:not([tabindex="-1"])');
+                        var firstFocusable = focusable[0];
+                        //form.submit();
+                    }
+                    return false;
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="loading">
+        <div id="loadingcontent">
+            <p id="loadingspinner">
+                <img src="~/images/GifCirculos.gif" />
+                Un Momento Por Favor...
+            </p>
+        </div>
+    </div>
+    <div class="main">
+        <div id="loader"></div>
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-light bg-white static-top text-black"
+                <div class="container-fluid">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Prospecto</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="CProspecto" asp-action="Index">Prospectos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Roles" asp-action="Index">Roles</a>
+                            </li>
+                        </ul>
+                        <partial name="_LoginPartial" ></partial>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <div class="container">
+            <main role="main" class="pb-3">
+                @await Html.PartialAsync("_NotificationPanel")
+                @RenderBody()
+            </main>
+        </div>
+
+        <footer class="footer">
+            &copy; 2022 - Prospecto - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </footer>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @* Added for JQueryUI (Debug) *@
+    <link href="~/lib/jquery-ui/themes/smoothness/jquery-ui.css" rel="stylesheet" />
+    <script src="~/lib/jquery/jquery.js"></script>
+    <script src="~/lib/jquery-ui/jquery-ui.js"></script>
+
+    @*<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>*@
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/fixedcolumns/3.3.3/js/dataTables.fixedColumns.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jq-2.2.4/dt-1.10.13/fc-3.2.2/fh-3.1.2/r-2.1.0/sc-1.4.2/datatables.min.css" />
+
+    <script src="https://cdn.datatables.net/plug-ins/1.10.25/dataRender/datetime.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
+<script type="text/javascript">
+    @*With the element initially shown, we can hide it slowly:*@
+    $("#loader").fadeOut(1000);
+</script>
+
+
+

@@ -1,0 +1,109 @@
+﻿@model Prospecto.Models.ProspectoModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "/Views/Shared/_Layout.cshtml";
+
+    string btndesables = "";
+    if (ViewBag.Status == "T")
+    {
+        btndesables = "disabled";
+    }
+}
+
+<form asp-controller="" asp-action="" role="form" method="post">
+    <div class="card border-info mb-3"  style="margin-top:10px !important">
+        <div class="card-header bg-info text-white">PROSPECTOS (Autorizar o Rechazar)</div>
+        <div class="card-body" id="content">
+            @Html.AntiForgeryToken()@*Para prevenir ataques al formulario*@
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="container bg-light">
+                <div class="col-md-12 text-center">
+                    <a class="btn btn-primary mr-5" href="@Url.Action("Index", "CProspecto")" role="button" data-toggle="tooltip" data-placement="top" title="Regresar">
+                        <i class="fas fa-arrow-left"></i> Regresar
+                    </a>
+
+                    <a class="btn btn-primary mr-2 @btndesables" id="btnAutoriza" title="Autorizar" href="#" role="button" onclick="ProsAut()" data-toggle="tooltip" data-placement="top">
+                       <i class="fas fa-check"></i> Autorizar
+                    </a>
+
+                    <a class="btn btn-primary mr-2 text-white modal-link @btndesables" data-toggle="modal" data-target="#addAutmodal" id="btnRechaza"
+                         data-title="Rechazar Prospecto" data-url="@Url.Action("Rechazar", "CProspecto",new{id=@ViewBag.id})" data-assigned-id="" data-placement="bottom" title="Rechazar Prospecto">
+                         <i class="fas fa-remove"></i> Rechazar
+                    </a>
+                </div>
+                
+                <br />
+                @if (ViewBag.Status == "T")
+                {
+                    <label id="msm" style="display: block;font-weight:bold;text-align: center;line-height:150%;font-size:16px;color:brown">@ViewBag.StatusText</label>
+                }
+
+
+                <div class="row">
+                    <div class="col-sm-4" style="padding-left:5px !important;padding-right: 2px !important;">
+                        <input asp-for="ID" type="hidden" value="@((ViewBag.id==null) ? 0 : ViewBag.id)" id="IdAut" />
+                        <label asp-for="Nombre" style="font-weight:bold;"></label>
+                        <input asp-for="Nombre" class="form-control" type="text" tabindex="1" autocomplete="off" data-val-required=" " data-val="true" maxlength=100 autofocus readonly="readonly"/>
+                        <span asp-validation-for="Nombre" class="text-danger"></span>
+                    </div>
+                    <div class="col-sm-3" style="padding-left:5px !important;padding-right: 2px !important;">
+                        <label asp-for="PrimerApellido" style="font-weight:bold;"></label>
+                        <input asp-for="PrimerApellido" class="form-control" type="text" tabindex="2" autocomplete="off" data-val-required=" " data-val="true" maxlength=80 readonly="readonly"/>
+                        <span asp-validation-for="PrimerApellido" class="text-danger"></span>
+                    </div>
+                    <div class="col-sm-3" style="padding-left:5px !important;padding-right: 2px !important;">
+                        <label asp-for="SegundoApellido" style="font-weight:bold;"></label>
+                        <input asp-for="SegundoApellido" class="form-control" type="text" tabindex="3" autocomplete="off" maxlength=80 readonly="readonly"/>
+                        <span asp-validation-for="SegundoApellido" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3" style="padding-left:5px !important;padding-right: 2px !important;">
+                        <label asp-for="SCol1" style="font-weight:bold;" class="col-md-offset-0 control-label"></label>
+                        <input asp-for="ColoniaNom" class="form-control" type="text" tabindex="-1" readonly="readonly" />
+                    </div>
+                    <div class="col-sm-1" style="padding-left:5px !important;padding-right: 2px !important;">
+                        <label asp-for="CP" style="font-weight:bold;"></label>
+                        <input asp-for="CP" class="form-control" type="text" tabindex="-1" readonly="readonly"/>
+                    </div>
+                    <div class="col-sm-3" style="padding-left:5px !important;padding-right: 2px !important;">
+                         <label asp-for="Calle" style="font-weight:bold;" class="col-md-offset-0 control-label"></label>
+                         <div class="input-group">
+                             <input  asp-for="CalleNom" class="form-control" type="text" tabindex="-1" readonly="readonly" />
+                        </div>
+                    </div>
+                    <div class="col-sm-1" style="padding-left:5px !important;padding-right: 2px !important;">
+                        <label asp-for="Numero" style="font-weight:bold;"></label>
+                        <input asp-for="Numero" class="form-control" type="text" tabindex="6" autocomplete="off" data-val-required=" " data-val="true" maxlength=10  readonly="readonly" />
+                        <span asp-validation-for="Numero" class="text-danger"></span>
+                    </div>
+                    <div class="col-sm-2" style="padding-left:5px !important;padding-right: 2px !important;">
+                        <label asp-for="Telefono" style="font-weight:bold;"></label>
+                        <input asp-for="Telefono" class="form-control" type="text" tabindex="7" autocomplete="off" data-val-required=" " data-val="true" maxlength=10  readonly="readonly" />
+                        <span asp-validation-for="Telefono" class="text-danger"></span>
+                    </div>
+                    <div class="col-sm-2" style="padding-left:5px !important;padding-right: 2px !important;">
+                        <label asp-for="RFC" style="font-weight:bold;"></label>
+                        <input asp-for="RFC" class="form-control" type="text" tabindex="7" autocomplete="off" data-val-required=" " data-val="true" maxlength=15  readonly="readonly" />
+                        <span asp-validation-for="RFC" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<!-- The Modal -->
+<div class="modal fade" id="addAutmodal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="titulo"></h4>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="Contenido">
+            </div>
+        </div>
+    </div>
+</div>

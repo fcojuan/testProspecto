@@ -1,0 +1,72 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "provider": "unpkg",
+      "library": "bootstrap@5.0.2",
+      "destination": "wwwroot/lib/bootstrap/"
+    },
+    {
+      "library": "jquery@3.6.0",
+      "files": [
+        "jquery.js",
+        "jquery.min.js",
+        "jquery.min.map",
+        "jquery.slim.js",
+        "jquery.slim.min.js",
+        "jquery.slim.min.map"
+      ],
+      "destination": "wwwroot/lib/jquery/"
+    },
+    {
+      "library": "jqueryui@1.12.1",
+      "destination": "wwwroot/lib/jquery-ui/"
+    },
+    {
+      "library": "jquery-validate@1.19.3",
+      "files": [
+        "additional-methods.js",
+        "additional-methods.min.js",
+        "jquery.validate.js",
+        "jquery.validate.min.js"
+      ],
+      "destination": "wwwroot/lib/jquery-validation/dist/"
+    },
+    {
+      "library": "jquery-validation-unobtrusive@3.2.12",
+      "destination": "wwwroot/lib/jquery-validation-unobtrusive/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "font-awesome@5.15.4",
+      "destination": "wwwroot/lib/font-awesome/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "datatables@1.10.21",
+      "destination": "wwwroot/lib/datatables/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "datatables.net-fixedcolumns@3.3.3",
+      "destination": "wwwroot/lib/datatables/js/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "AlertifyJS@1.13.1",
+      "destination": "wwwroot/alertifyjs/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "sweetalert@2.1.2",
+      "destination": "wwwroot/sweetAlert/"
+    },
+    {
+      "provider": "jsdelivr",
+      "library": "sweetalert2@11.4.0",
+      "destination": "wwwroot/lib/sweetalert2/"
+    }
+
+  ]
+}

@@ -1,0 +1,17 @@
+﻿@model Prospecto.Models.CalleModel
+
+
+@Html.AntiForgeryToken()
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+<div class="row">
+    <div class="col-sm-10">
+        <label for="Calle" style="font-weight:bold;">Nombre De La Calle</label>
+        <input asp-for="NomCalleNew" class="form-control" type="text" maxlength="50" name="newCalleSol" id="newCalleSol" autofocus />
+    </div>
+</div>
+<br />
+<div class="modal-footer">
+    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+    <input type="submit" value="Guardar" class="btn btn-primary" href="#" onclick="AgregarCalle('/CProspecto/NewCalleAjax')" data-bs-dismiss="modal" />
+</div>
